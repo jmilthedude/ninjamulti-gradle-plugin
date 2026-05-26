@@ -5,7 +5,6 @@ import org.gradle.api.Project;
 import org.gradle.api.publish.PublishingExtension;
 import org.gradle.api.publish.maven.MavenPublication;
 import org.gradle.api.tasks.bundling.Jar;
-import org.gradle.api.tasks.javadoc.Javadoc;
 
 import java.util.HashMap;
 import java.util.List;
@@ -126,6 +125,26 @@ public class NinjaMultiCommonPlugin implements Plugin<Project> {
                 }
             });
         }
+
+        project.getConfigurations().register("commonJava", conf -> {
+            conf.setCanBeResolved(false);
+            conf.setCanBeConsumed(true);
+        });
+        project.getConfigurations().register("commonResources", conf -> {
+            conf.setCanBeResolved(false);
+            conf.setCanBeConsumed(true);
+        });
+
+        project.afterEvaluate(p -> {
+            org.gradle.api.plugins.JavaPluginExtension javaExt =
+                    p.getExtensions().getByType(org.gradle.api.plugins.JavaPluginExtension.class);
+            java.io.File javaSrcDir = javaExt.getSourceSets().getByName("main")
+                    .getJava().getSourceDirectories().getSingleFile();
+            java.io.File resSrcDir = javaExt.getSourceSets().getByName("main")
+                    .getResources().getSourceDirectories().getSingleFile();
+            p.getArtifacts().add("commonJava", javaSrcDir);
+            p.getArtifacts().add("commonResources", resSrcDir);
+        });
     }
 
     static Map<String, Object> buildExpandProps(Project project) {

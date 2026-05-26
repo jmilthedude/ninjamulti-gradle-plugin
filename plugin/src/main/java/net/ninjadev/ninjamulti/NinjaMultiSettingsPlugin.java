@@ -4,8 +4,11 @@ import org.gradle.api.Plugin;
 import org.gradle.api.initialization.Settings;
 
 import java.io.File;
+import java.util.Set;
 
 public class NinjaMultiSettingsPlugin implements Plugin<Settings> {
+
+    private static final Set<String> LOADER_NAMES = Set.of("fabric", "forge", "neoforge");
 
     @Override
     public void apply(Settings settings) {
@@ -50,5 +53,15 @@ public class NinjaMultiSettingsPlugin implements Plugin<Settings> {
                 settings.include(sub);
             }
         }
+
+        settings.getGradle().beforeProject(project -> {
+            if (project == project.getRootProject()) {
+                project.getPluginManager().apply(NinjaMultiRootPlugin.class);
+            } else if (project.getName().equals("common")) {
+                project.getPluginManager().apply(NinjaMultiCommonPlugin.class);
+            } else if (LOADER_NAMES.contains(project.getName())) {
+                project.getPluginManager().apply(NinjaMultiLoaderPlugin.class);
+            }
+        });
     }
 }
