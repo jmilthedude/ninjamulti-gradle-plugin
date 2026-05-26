@@ -1,0 +1,3 @@
+net.ninjadev.ninjamulti.api.platform.FabricPlatformHelper
+net.ninjadev.ninjamulti.api.platform.ForgePlatformHelper
+net.ninjadev.ninjamulti.api.platform.NeoForgePlatformHelper

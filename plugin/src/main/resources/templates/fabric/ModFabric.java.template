@@ -1,0 +1,12 @@
+package {{modPackage}};
+
+import net.fabricmc.api.ModInitializer;
+import net.ninjadev.ninjamulti.api.platform.FabricRegistrationHelper;
+
+public class {{modClassName}}Fabric implements ModInitializer {
+
+    @Override
+    public void onInitialize() {
+        {{modClassName}}Common.init(new FabricRegistrationHelper(Constants.MOD_ID));
+    }
+}

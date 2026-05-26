@@ -1,0 +1,10 @@
+package {{modPackage}};
+
+import net.ninjadev.ninjamulti.api.Services;
+import net.ninjadev.ninjamulti.api.services.IRegistrationHelper;
+
+public class {{modClassName}}Common {
+    public static void init(IRegistrationHelper registrationHelper) {
+        Constants.LOG.info("{} initialized on {}", Constants.MOD_NAME, Services.PLATFORM.getPlatformName());
+    }
+}

@@ -1,0 +1,53 @@
+plugins {
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+}
+
+group = 'net.ninjadev'
+version = '1.0.0'
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(21)
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly gradleApi()
+}
+
+gradlePlugin {
+    plugins {
+        ninjaMultiSettings {
+            id = 'net.ninjadev.ninjamulti'
+            implementationClass = 'net.ninjadev.ninjamulti.NinjaMultiSettingsPlugin'
+        }
+        ninjaMultiRoot {
+            id = 'net.ninjadev.ninjamulti.root'
+            implementationClass = 'net.ninjadev.ninjamulti.NinjaMultiRootPlugin'
+        }
+        ninjaMultiCommon {
+            id = 'net.ninjadev.ninjamulti.common'
+            implementationClass = 'net.ninjadev.ninjamulti.NinjaMultiCommonPlugin'
+        }
+        ninjaMultiLoader {
+            id = 'net.ninjadev.ninjamulti.loader'
+            implementationClass = 'net.ninjadev.ninjamulti.NinjaMultiLoaderPlugin'
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = 'local'
+            url = layout.buildDirectory.dir('repo')
+        }
+        maven {
+            name = 'sharedLocal'
+            url = 'file:///C:/Users/jmils/IntelliJ/Multi/.local-maven'
+        }
+    }
+}
