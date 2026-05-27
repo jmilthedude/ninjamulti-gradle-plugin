@@ -2,11 +2,11 @@ package {{modPackage}};
 
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
-import net.ninjadev.ninjamulti.api.platform.NeoForgeRegistrationHelper;
+import net.ninjadev.ninjamulti.api.Services;
 
 @Mod(Constants.MOD_ID)
 public class {{modClassName}}Neoforge {
     public {{modClassName}}Neoforge(IEventBus eventBus) {
-        {{modClassName}}Common.init(new NeoForgeRegistrationHelper(Constants.MOD_ID, eventBus));
+        {{modClassName}}Common.init(Services.createRegistrationHelper(Constants.MOD_ID, eventBus));
     }
 }

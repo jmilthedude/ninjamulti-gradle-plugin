@@ -2,11 +2,11 @@ package {{modPackage}};
 
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.ninjadev.ninjamulti.api.platform.ForgeRegistrationHelper;
+import net.ninjadev.ninjamulti.api.Services;
 
 @Mod(Constants.MOD_ID)
 public class {{modClassName}}Forge {
     public {{modClassName}}Forge(FMLJavaModLoadingContext context) {
-        {{modClassName}}Common.init(new ForgeRegistrationHelper(Constants.MOD_ID, context.getModBusGroup()));
+        {{modClassName}}Common.init(Services.createRegistrationHelper(Constants.MOD_ID, context.getModBusGroup()));
     }
 }
