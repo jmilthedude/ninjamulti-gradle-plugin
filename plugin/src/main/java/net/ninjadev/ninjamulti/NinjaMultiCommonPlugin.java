@@ -60,6 +60,14 @@ public class NinjaMultiCommonPlugin implements Plugin<Project> {
             m.setUrl("https://maven.blamejared.com");
         });
 
+        String localMavenRepo = System.getenv("local_maven_url");
+        if (localMavenRepo != null) {
+            project.getRepositories().maven(m -> {
+                m.setName("NinjaMultiLocal");
+                m.setUrl(localMavenRepo);
+            });
+        }
+
         String archivesName = modId + "-" + project.getName() + "-" + mcVersion;
         List<String> variants = List.of("apiElements", "runtimeElements", "sourcesElements", "javadocElements");
         for (String variant : variants) {
