@@ -65,8 +65,6 @@ public class NinjaMultiCommonPlugin implements Plugin<Project> {
         for (String variant : variants) {
             project.getConfigurations().getByName(variant).getOutgoing().capability(
                     project.getGroup() + ":" + archivesName + ":" + project.getVersion());
-            project.getConfigurations().getByName(variant).getOutgoing().capability(
-                    project.getGroup() + ":" + modId + "-" + project.getName() + "-" + mcVersion + ":" + project.getVersion());
         }
 
         project.getTasks().named("sourcesJar", Jar.class, jar -> {

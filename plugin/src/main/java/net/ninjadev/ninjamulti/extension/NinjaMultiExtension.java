@@ -37,6 +37,11 @@ public abstract class NinjaMultiExtension {
         if (getBaseLoader().isPresent()) {
             return getBaseLoader().get();
         }
+        for (String loader : java.util.List.of("forge", "neoforge", "fabric")) {
+            if (project.findProject(":" + loader) != null) {
+                return loader;
+            }
+        }
         return "forge";
     }
 }
