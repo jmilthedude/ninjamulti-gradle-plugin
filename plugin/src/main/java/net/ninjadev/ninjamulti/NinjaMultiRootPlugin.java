@@ -64,7 +64,7 @@ public class NinjaMultiRootPlugin implements Plugin<Project> {
             Map<String, Set<String>> loaderSpecificPatterns = new HashMap<>();
             for (String loader : loaders) {
                 Project loaderProject = project.project(":" + loader);
-                Set<String> patterns = scanLoaderSources(loaderProject, modPackagePath);
+                Set<String> patterns = scanLoaderSources(loaderProject);
                 loaderSpecificPatterns.put(loader, patterns);
             }
 
@@ -112,7 +112,7 @@ public class NinjaMultiRootPlugin implements Plugin<Project> {
         });
     }
 
-    private Set<String> scanLoaderSources(Project loaderProject, String modPackagePath) {
+    private Set<String> scanLoaderSources(Project loaderProject) {
         Set<String> patterns = new LinkedHashSet<>();
         File srcDir = new File(loaderProject.getProjectDir(), "src/main/java");
         if (!srcDir.exists()) return patterns;
