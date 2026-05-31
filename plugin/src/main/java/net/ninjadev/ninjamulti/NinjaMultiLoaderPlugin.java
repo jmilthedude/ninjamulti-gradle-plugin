@@ -53,8 +53,11 @@ public class NinjaMultiLoaderPlugin implements Plugin<Project> {
 
         project.getTasks().named("processResources", task -> {
             task.dependsOn(project.getConfigurations().getByName("commonResources"));
-            ((org.gradle.language.jvm.tasks.ProcessResources) task)
-                    .from(project.getConfigurations().getByName("commonResources"));
+            org.gradle.language.jvm.tasks.ProcessResources processResources =
+                    (org.gradle.language.jvm.tasks.ProcessResources) task;
+            processResources.from(project.getConfigurations().getByName("commonResources"));
+            processResources.from(project.getRootProject().file("universal"));
+            processResources.setDuplicatesStrategy(org.gradle.api.file.DuplicatesStrategy.EXCLUDE);
         });
 
         project.getTasks().named("javadoc", Javadoc.class, task -> {

@@ -51,6 +51,10 @@ public abstract class SetupModTask extends DefaultTask {
                 "common/src/main/java/" + packagePath + "/Constants.java", vars);
         generateIfSubprojectExists(rootDir, "common", "templates/common/ModCommon.java.template",
                 "common/src/main/java/" + packagePath + "/" + modClassName + "Common.java", vars);
+        generateIfSubprojectExists(rootDir, "common", "templates/common/pack.mcmeta.template",
+                "common/src/main/resources/pack.mcmeta", vars);
+        generateIfSubprojectExists(rootDir, "common", "templates/universal/mixins.json.template",
+                "common/src/main/resources/" + modId + ".mixins.json", vars);
 
         generateIfSubprojectExists(rootDir, "fabric", "templates/fabric/ModFabric.java.template",
                 "fabric/src/main/java/" + packagePath + "/" + modClassName + "Fabric.java", vars);
